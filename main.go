@@ -10,24 +10,24 @@ import (
 
 // Dockerfile represents the parsed Dockerfile struct
 type Dockerfile struct {
-	Add         string
-	Arg         string
-	Cmd         string
-	Copy        string
-	Entrypoint  string
-	Env         string
-	Expose      string
-	From        string
-	Healthcheck string
-	Label       string
-	Maintainer  string
-	Onbuild     string
-	Run         string
-	Shell       string
-	StopSignal  string
-	User        string
-	Volume      string
-	Workdir     string
+	Add         []string
+	Arg         []string
+	Cmd         []string
+	Copy        []string
+	Entrypoint  []string
+	Env         []string
+	Expose      []string
+	From        []string
+	Healthcheck []string
+	Label       []string
+	Maintainer  []string
+	Onbuild     []string
+	Run         []string
+	Shell       []string
+	StopSignal  []string
+	User        []string
+	Volume      []string
+	Workdir     []string
 }
 
 // Parse takes a reader originated from a dockerfile and returns a Dockerfile struct.
@@ -39,41 +39,41 @@ func Parse(f io.Reader) (d Dockerfile, err error) {
 		cmd, args := parseLine(scanner.Text())
 		switch strings.ToUpper(cmd) {
 		case "ADD":
-			d.Add = args
+			d.Add = append(d.Add, args)
 		case "ARG":
-			d.Arg = args
+			d.Arg = append(d.Arg, args)
 		case "CMD":
-			d.Cmd = args
+			d.Cmd = append(d.Cmd, args)
 		case "COPY":
-			d.Copy = args
+			d.Copy = append(d.Copy, args)
 		case "ENTRYPOINT":
-			d.Entrypoint = args
+			d.Entrypoint = append(d.Entrypoint, args)
 		case "ENV":
-			d.Env = args
+			d.Env = append(d.Env, args)
 		case "EXPOSE":
-			d.Expose = args
+			d.Expose = append(d.Expose, args)
 		case "FROM":
-			d.From = args
+			d.From = append(d.From, args)
 		case "HEALTHCHECK":
-			d.Healthcheck = args
+			d.Healthcheck = append(d.Healthcheck, args)
 		case "LABEL":
-			d.Label = args
+			d.Label = append(d.Label, args)
 		case "MAINTAINER":
-			d.Maintainer = args
+			d.Maintainer = append(d.Maintainer, args)
 		case "ONBUILD":
-			d.Onbuild = args
+			d.Onbuild = append(d.Onbuild, args)
 		case "RUN":
-			d.Run = args
+			d.Run = append(d.Run, args)
 		case "SHELL":
-			d.Shell = args
+			d.Shell = append(d.Shell, args)
 		case "STOPSIGNAL":
-			d.StopSignal = args
+			d.StopSignal = append(d.StopSignal, args)
 		case "USER":
-			d.User = args
+			d.User = append(d.User, args)
 		case "VOLUME":
-			d.Volume = args
+			d.Volume = append(d.Volume, args)
 		case "WORKDIR":
-			d.Workdir = args
+			d.Workdir = append(d.Workdir, args)
 		}
 	}
 
